@@ -2,14 +2,14 @@
 
 ``` npm install ```
 
-''' pip install -r packages.txt '''
+``` pip install -r packages.txt ```
 
 ## Run
 
 ### Backend
 
-''' python manage.py runserver '''
+``` python manage.py runserver ```
 
 ### Frontend
 
-''' npm run dev '''
+``` npm run dev ```
