@@ -1,6 +1,6 @@
 ## Install
 
-''' npm install '''
+``` npm install ```
 
 ''' pip install -r packages.txt '''
 
