@@ -25,7 +25,6 @@ def search(request):
     query = request.GET.get('inputValue', '')
     # query.encode('utf-8')
     public_tweets = api.search(q=query, count=100)
-    print('#' * 55, public_tweets)
     hashmap = {}
     result_hashtags = []
     result_tweets = []
@@ -33,12 +32,13 @@ def search(request):
 
         # return top 10 hashtags in the result
 
-        print('EACH TWEET ------------------------------------------------------------------------------------------------- ', tweet)
         fil = list(filter(lambda x: len(x) > 0, tweet.entities['hashtags']))
 
         print('FIL hashtags entity from tweet --- ', fil)
 
-        [result_hashtags.append(tweetData['text'].encode('utf-8'))
+        # [result_hashtags.append(tweetData['text'].encode('utf-8'))
+        #  for tweetData in fil]
+        [result_hashtags.append(tweetData['text'])
          for tweetData in fil]
 
         result_tweets.append({
