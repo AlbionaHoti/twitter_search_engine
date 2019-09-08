@@ -66,11 +66,11 @@ class App extends Component {
           {
             this.state.data.hashtags.length > 0 ? 
             (
-              <div class="columns">
-                <div class="column">
+              <div className="columns">
+                <div className="column">
                   <SearchResultsHashtags results={this.state.data.hashtags} />
                 </div>
-                <div class="column">         
+                <div className="column">         
                   <SearchResultsTweets results={this.state.data.tweets} />
                 </div>
               </div>

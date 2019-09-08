@@ -3,7 +3,6 @@ from django.http import JsonResponse
 from .serializer import tweetDetailsSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-import json
 import tweepy
 import json
 from collections import Counter
@@ -24,14 +23,20 @@ def index(request):
 @api_view(['GET'])
 def search(request):
     query = request.GET.get('inputValue', '')
+    # query.encode('utf-8')
     public_tweets = api.search(q=query, count=100)
+    print('#' * 55, public_tweets)
     hashmap = {}
     result_hashtags = []
     result_tweets = []
     for tweet in public_tweets:
+
         # return top 10 hashtags in the result
 
+        print('EACH TWEET ------------------------------------------------------------------------------------------------- ', tweet)
         fil = list(filter(lambda x: len(x) > 0, tweet.entities['hashtags']))
+
+        print('FIL hashtags entity from tweet --- ', fil)
 
         [result_hashtags.append(tweetData['text'].encode('utf-8'))
          for tweetData in fil]
