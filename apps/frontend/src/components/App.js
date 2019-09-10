@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import SearchResultsHashtags from "./SearchResultsHashtags";
 import SearchResultsTweets from "./SearchResultsTweets";
+import RandomHashtag from './RandomHashtag';
 import Table from "./Table";
 
 class App extends Component {
@@ -13,16 +14,36 @@ class App extends Component {
         hashtags: [],
         tweets: []
       },
+      hackerOne: []
     };
 
     this.updateInputValue = this.updateInputValue.bind(this);
     this.queryData = this.queryData.bind(this);
+    this.getHackeroneData = this.getHackeroneData.bind(this);
   }
 
   updateInputValue(evt) {
     this.setState({
       inputValue: evt.target.value
     });
+  }
+
+  getHackeroneData() {
+    fetch('https://hackerone.com/leaderboard/invites.json')
+    // .then(res => res.json())
+    .then(
+      (result) => {
+        this.setState({
+          hackerOne: result,
+        });
+
+      },
+      (error) => {
+        this.setState({
+          isLoaded: true,
+        });
+      }
+    )
   }
 
   queryData() {
@@ -46,9 +67,12 @@ class App extends Component {
 
   componentDidMount() {
     this.queryData();
+    this.getHackeroneData();
   }
 
   render() {
+    console.log('Hackerone', this.state.hackerOne)
+    
     return (  
         <div className="container">
           <input
@@ -72,6 +96,9 @@ class App extends Component {
                 </div>
                 <div className="column">         
                   <SearchResultsTweets results={this.state.data.tweets} />
+                </div>
+                <div className="column">         
+                  
                 </div>
               </div>
             )

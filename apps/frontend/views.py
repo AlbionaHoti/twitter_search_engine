@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 import tweepy
 import json
+from random import randrange
 from collections import Counter
 
 auth = tweepy.OAuthHandler('crvrNUaSazdwTLYOgO0HsKPVs',
@@ -28,13 +29,14 @@ def search(request):
     hashmap = {}
     result_hashtags = []
     result_tweets = []
+
+    # Random hashtag from the list of tweets
+    random_hashtag = ''
     for tweet in public_tweets:
 
         # return top 10 hashtags in the result
 
         fil = list(filter(lambda x: len(x) > 0, tweet.entities['hashtags']))
-
-        print('FIL hashtags entity from tweet --- ', fil)
 
         # [result_hashtags.append(tweetData['text'].encode('utf-8'))
         #  for tweetData in fil]
@@ -56,4 +58,4 @@ def search(request):
 
     # extract the 10 hashtags most used
     high = k.most_common(10)
-    return Response({'hashtags': high, 'tweets': result_tweets})
+    return Response({'hashtags': high, 'tweets': result_tweets, 'random_hashtag': random_hashtag})
